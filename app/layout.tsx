@@ -21,7 +21,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider appearance={{ baseTheme: dark }} >
+    <ClerkProvider appearance={{ baseTheme: dark }}
+    afterSignInUrl="/"     // 👈 your desired post-login route
+    afterSignUpUrl="/" >
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.className} antialiased`}
