@@ -3,7 +3,11 @@ import { Webhook } from 'svix';
 import { headers } from 'next/headers';
 import { WebhookEvent } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
-import prisma  from '@/lib/prisma'; // Adjust the import based on your prisma setup
+import prisma  from '@/lib/prisma'; /**
+ * Handles POST requests for Clerk webhook events, verifying the payload and updating user records in the database.
+ *
+ * Verifies the incoming webhook using Svix headers and a secret key. Depending on the event type (`user.created`, `user.updated`, or `user.deleted`), it creates, updates, or deletes a user record in the database. Returns appropriate HTTP responses for missing headers, verification failures, or missing users.
+ */
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
