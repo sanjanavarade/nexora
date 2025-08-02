@@ -13,6 +13,7 @@
     "@clerk/themes": "^2.4.3",
     "@prisma/client": "^6.13.0",
     "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-tooltip": "^1.2.7",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.535.0",
@@ -22,7 +23,9 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "svix": "^1.70.0",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "usehooks-ts": "^3.1.1",
+    "zustand": "^5.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
