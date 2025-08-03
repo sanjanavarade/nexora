@@ -3,10 +3,11 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import {dark} from '@clerk/themes';
 import { ThemeProvider } from "@/components/theme-provider"
-import { ClerkProvider, SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Navbar } from "./(browse)/_components/navbar";
-import Sidebar from "./(browse)/_components/sidebar";
+import Sidebar, { SidebarSkeleton } from "./(browse)/_components/sidebar";
 import Container from "./(browse)/_components/container";
+import { Suspense } from "react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -37,7 +38,9 @@ export default function RootLayout({
           >
         <Navbar/>
            <div className="flex h-full pt-20">
+            <Suspense fallback={<SidebarSkeleton/>}>
             <Sidebar/>
+            </Suspense>
             <Container>
                 {children}
             </Container>
