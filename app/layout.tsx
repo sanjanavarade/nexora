@@ -8,6 +8,9 @@ import { Navbar } from "./(browse)/_components/navbar";
 import Sidebar, { SidebarSkeleton } from "./(browse)/_components/sidebar";
 import Container from "./(browse)/_components/container";
 import { Suspense } from "react";
+import {Toaster} from 'sonner';
+
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,11 +34,13 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased`}
       >
+        
         <ThemeProvider
             attribute="class"
             forcedTheme="system"
             storageKey="nexora-theme"
           >
+            <Toaster theme="light" position="bottom-center"/>
         <Navbar/>
            <div className="flex h-full pt-20">
             <Suspense fallback={<SidebarSkeleton/>}>
