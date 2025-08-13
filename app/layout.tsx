@@ -43,12 +43,14 @@ export default function RootLayout({
             <Toaster theme="light" position="bottom-center"/>
         <Navbar/>
            <div className="flex h-full pt-20">
-            <Suspense fallback={<SidebarSkeleton/>}>
+            {/* <Suspense fallback={<SidebarSkeleton/>}>
             <Sidebar/>
-            </Suspense>
+        </Suspense>
             <Container>
                 {children}
-            </Container>
+            </Container> */}
+            {children}
+            
             
             </div>
         </ThemeProvider>

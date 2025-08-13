@@ -15,7 +15,7 @@ const Sidebar = async () => {
     <Wrapper>
       <Toggle/>
       <div className='space-y-4 pt-4 lg:pt-0'>
-        <Following data={Following}/>
+        <Following data={follows}/>
         <Recommended data = {recommended}/>
         
       </div>

@@ -58,6 +58,12 @@ const svix_id = headerPayload.get("svix-id");
             username: payload.data.username ,
             imageUrl: payload.data.image_url,
 
+            stream:{
+              create:{
+                name:`${payload.data.username}'s stream`,            
+                }
+            },
+
         }
     });
   }
