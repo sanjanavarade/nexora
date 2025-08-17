@@ -17,7 +17,15 @@ export const getFollowedUsers = async () => {
                 }
             },
             include: {
-                following: true,
+                following: {
+                    include:{
+                        stream: {
+                            select:{
+                                isLive:true,
+                            }
+                        },
+                    },
+                },
             },
         });
 
@@ -57,6 +65,7 @@ export const isFollowingUser = async (username: string) => {
 };
 
 export const followUser = async (username: string) => {
+    console.log("followUser called with username:", username);
     const self = await getSelf();
 
     const otherUser = await prisma.user.findUnique({

@@ -85,7 +85,7 @@ model Block {
   blocker User @relation(name: "Blocking", fields: [blockerId], references: [id], onDelete: Cascade)
   blocked User @relation(name: "BlockedBy", fields: [blockedId], references: [id], onDelete: Cascade)
 
-  @@index([blockerId, blockedId])
+  @@unique([blockerId, blockedId])
   @@index([blockerId])
   @@index([blockedId])
 }

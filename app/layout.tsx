@@ -11,7 +11,6 @@ import { Suspense } from "react";
 import {Toaster} from 'sonner';
 
 
-
 const inter = Inter({
   subsets: ["latin"],
 });
@@ -28,32 +27,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider appearance={{ baseTheme: dark }}
- >
+    <ClerkProvider appearance={{ baseTheme: dark }} >
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.className} antialiased`}
       >
         
-        <ThemeProvider
+          <ThemeProvider
             attribute="class"
             forcedTheme="system"
             storageKey="nexora-theme"
           >
-            <Toaster theme="light" position="bottom-center"/>
-        <Navbar/>
-           <div className="flex h-full pt-20">
-            {/* <Suspense fallback={<SidebarSkeleton/>}>
-            <Sidebar/>
-        </Suspense>
-            <Container>
-                {children}
-            </Container> */}
+          <Toaster theme="light" position="bottom-center"/>
+            
             {children}
-            
-            
-            </div>
-        </ThemeProvider>
+          </ThemeProvider>
       </body>
     </html>
     </ClerkProvider>

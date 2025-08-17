@@ -29,7 +29,8 @@ const UserPage = async ({ params }: UserPageProps) => {
             <p>user ID: {user.id}</p>
             <p>is following: {`${isFollowing}`}</p>
             <p>is blocked by this user: {`${isBlocked}`}</p>
-            <Actions userId={user.id} isFollowing={isFollowing} />
+            
+            <Actions  isFollowing={isFollowing} userId={user.id} username={user.username} />
             
         </div>
     );
