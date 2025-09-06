@@ -1,5 +1,25 @@
-import * as Avatar from "@radix-ui/react-avatar";
+
 import { cn } from "@/lib/utils";
+import { cva,VariantProps } from "class-variance-authority";
+import {Skeleton} from "@/components/ui/skeleton";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar";
+import { LiveBadge } from "./live-badge";
+
+const avatarSizes = cva(
+  "",
+  {
+    variants:{
+      size: {
+        default: "h-8 w-8",
+        lg: "h-14 w-14",
+      },
+    },
+  }
+)
 
 interface UserAvatarProps {
   username: string;
@@ -27,8 +47,8 @@ export const UserAvatar = ({
 
   return (
     <div className="relative">
-      <Avatar.Root className="inline-block">
-        <Avatar.Image
+      <Avatar className="inline-block">
+        <AvatarImage
           src={imageUrl || "/default-avatar.png"}
           onError={(e) => {
             (e.currentTarget as HTMLImageElement).src = "/default-avatar.png";
@@ -39,7 +59,7 @@ export const UserAvatar = ({
             ringClass
           )}
         />
-        <Avatar.Fallback
+        <AvatarFallback
           delayMs={500}
           className={cn(
             "flex items-center justify-center bg-muted text-white font-medium rounded-full",
@@ -49,8 +69,8 @@ export const UserAvatar = ({
           )}
         >
           {(username?.[0] ?? "U").toUpperCase()}
-        </Avatar.Fallback>
-      </Avatar.Root>
+        </AvatarFallback>
+      </Avatar>
 
       {showLive && (
         <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
@@ -60,5 +80,16 @@ export const UserAvatar = ({
         </div>
       )}
     </div>
+  );
+};
+
+interface UserAvatarSkeletonProps 
+  extends VariantProps<typeof avatarSizes>{};
+
+export const UserAvatarSkeleton = ({
+  size,
+}: UserAvatarSkeletonProps) => {
+  return(
+    <Skeleton className={cn("rounded-full", avatarSizes({size}),)}/>
   );
 };
