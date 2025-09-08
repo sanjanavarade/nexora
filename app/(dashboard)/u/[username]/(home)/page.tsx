@@ -14,7 +14,7 @@ const CreatorPage = async ({
 }:CreatorPageProps) => {
    const { username } = await params;
   const externalUser = await currentUser();
-  const user = await getUserByUsername(username);
+  const user = await getUserByUsername(params.username);
 
   if(!user || user.externalUserId !== externalUser?.id || !user.stream
   ){
