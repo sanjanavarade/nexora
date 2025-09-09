@@ -4,8 +4,23 @@ export const getUserByUsername = async (username: string) => {
   console.log("Fetching user by username:", username);
   const user = await prisma.user.findUnique({
     where: { username },
-    include: {
-      stream: true,
+    select: {
+      id:true,
+      externalUserId:true,
+      username:true,
+      bio: true,
+      imageUrl: true,
+      stream: {
+        select:{
+          id:true,
+          isLive:true,
+          isChatDelayed:true,
+          isChatEnabled:true,
+          isChatFollowersOnly: true,
+          thumbnailUrl: true,
+          name:true,
+        },
+      },
       _count: {
         select: { followedBy: true },
       },
