@@ -1,8 +1,13 @@
+import { Suspense } from "react";
+import {Results, ResultsSkeleton} from "./_components/results";
+
 export default function BrowsePage() {
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">Browse</h1>
-      <p>Welcome to the browse page.</p>
+    <div className="h-full p-8 max-w-screen-2xl mx-auto">
+      <Suspense fallback={<ResultsSkeleton/>}>
+        <Results/>
+      </Suspense>
+      
     </div>
   );
 }
