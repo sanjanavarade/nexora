@@ -1,5 +1,6 @@
 "use server"
 
+import { getSelf } from "@/lib/auth-service";
 import { blockUser, unblockUser } from "@/lib/block-service";
 import { RoomServiceClient } from "livekit-server-sdk";
 import { revalidatePath } from "next/cache";
@@ -31,10 +32,9 @@ export const onBlock = async (id: string) => {
 };
 
 export const onUnblock = async (username: string) => {
+  const self = await getSelf();
   const unblockedUser = await unblockUser(username);
-  revalidatePath("/");
-  if (unblockedUser) {
-    revalidatePath(`/${unblockedUser.blocked.username}`);
-  }
+  revalidatePath(`/u/${self.username}/community"`);
+  
   return unblockedUser;
 };

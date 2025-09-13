@@ -33,7 +33,7 @@ export const Results= async () => {
   )
 }
 
-export const ResultsSkeleton = () =>{
+export const ResultsSkeleton = async () =>{
     return(
         <div>
             <Skeleton className='h-8 w-[290px] mb-4'/>

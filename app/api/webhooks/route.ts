@@ -4,6 +4,7 @@ import { headers } from 'next/headers';
 import { WebhookEvent } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import prisma  from '@/lib/prisma'; // Adjust the import based on your prisma setup
+import { resetIngresses } from '@/actions/ingress';
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -51,22 +52,29 @@ const svix_id = headerPayload.get("svix-id");
 
   const eventType = evt.type;
 
-  if(eventType === 'user.created') {
+  if (eventType === "user.created") {
+  console.log("🔔 Webhook received: user.created");
+  console.log("Payload:", JSON.stringify(payload, null, 2));
+
+  try {
     await prisma.user.create({
-        data: {
-            externalUserId: payload.data.id,
-            username: payload.data.username ,
-            imageUrl: payload.data.image_url,
-
-            stream:{
-              create:{
-                name:`${payload.data.username}'s stream`,            
-                }
-            },
-
-        }
+      data: {
+        externalUserId: payload.data.id,
+        username: payload.data.username ?? `user_${payload.data.id}`, // fallback username
+        imageUrl: payload.data.image_url ?? "",
+        stream: {
+          create: {
+            name: `${payload.data.username ?? "Untitled"}'s stream`,
+          },
+        },
+      },
     });
+    console.log("✅ User inserted into Prisma");
+  } catch (err) {
+    console.error("❌ Prisma insert failed:", err);
   }
+}
+
 
   if(eventType === 'user.updated') {
     const currentUser = await prisma.user.findUnique({
@@ -90,6 +98,9 @@ const svix_id = headerPayload.get("svix-id");
     });
 }
  if(eventType === 'user.deleted') {
+
+   await resetIngresses(payload.data.id);
+   
     await prisma.user.delete({
         where: {    
             externalUserId: payload.data.id,

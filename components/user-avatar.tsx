@@ -1,4 +1,4 @@
-
+"use client"
 import { cn } from "@/lib/utils";
 import { cva,VariantProps } from "class-variance-authority";
 import {Skeleton} from "@/components/ui/skeleton";

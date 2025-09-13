@@ -88,3 +88,18 @@ export const isBlockedByUser = async (userId: string) => {
 
   return !!block;
 };
+
+export const getBlockedUsers = async() =>{
+  const self = await getSelf();
+
+  const blockedUsers = await prisma.block.findMany({
+    where:{
+      blockerId:self.id,
+    },
+    include:{
+      blocked:true,
+    },
+  });
+
+  return blockedUsers;
+}
