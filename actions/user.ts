@@ -1,6 +1,6 @@
 "use server"
 
-import type { User } from "@prisma/client";
+import type { User } from "@/app/generated/prisma/client";
 import {getSelf} from "@/lib/auth-service";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
