@@ -54,7 +54,13 @@ export const Actions = ({ isFollowing: initialIsFollowing, username }: ActionsPr
   const handleBlock = () => {
     startTrans(() => {
       onBlock(username)
-        .then((data) => toast.success(`Blocked the user ${data.blocked.username}`))
+        .then((data) => {
+          if (data?.blocked?.username) {
+            toast.success(`Blocked the user ${data.blocked.username}`);
+          } else {
+            toast.error("Failed to block the user");
+          }
+        })
         .catch(() => toast.error("Something went wrong"));
     });
   };
