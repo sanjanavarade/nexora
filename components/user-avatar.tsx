@@ -75,7 +75,7 @@ export const UserAvatar = ({
       {showLive && (
         <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
           <span className="bg-rose-500 text-white text-[10px] px-1.5 py-0.5 rounded-full">
-            LIVE
+            <LiveBadge/>
           </span>
         </div>
       )}
@@ -83,13 +83,10 @@ export const UserAvatar = ({
   );
 };
 
-interface UserAvatarSkeletonProps 
-  extends VariantProps<typeof avatarSizes>{};
+type UserAvatarSkeletonProps = VariantProps<typeof avatarSizes>;
 
-export const UserAvatarSkeleton = ({
-  size,
-}: UserAvatarSkeletonProps) => {
-  return(
-    <Skeleton className={cn("rounded-full", avatarSizes({size}),)}/>
+export const UserAvatarSkeleton = ({ size }: UserAvatarSkeletonProps) => {
+  return (
+    <Skeleton className={cn("rounded-full", avatarSizes({ size }))} />
   );
 };

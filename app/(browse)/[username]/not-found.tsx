@@ -9,7 +9,7 @@ const NotFoundPage = () => {
             404
         </h1>
         <p>
-            We coundn't find the user you were looking for.
+            We coundn&apos;t find the user you were looking for.
         </p>
         <Button variant="secondary" asChild>
             <Link href="/">

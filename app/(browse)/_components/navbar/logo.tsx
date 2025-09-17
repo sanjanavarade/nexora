@@ -30,7 +30,7 @@ export const Logo = () => {
                     Nexora
                 </p>
                 <p className='text-sm text-muted-foreground'>
-                    Let's Play
+                    Let&apos;s Play
                 </p>
             </div>
         </div>

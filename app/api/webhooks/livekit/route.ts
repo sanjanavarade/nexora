@@ -35,10 +35,12 @@ export async function POST(request: Request) {
 
     // Always return something
     return new Response("Webhook processed", { status: 200 });
-  } catch (err: any) {
-    console.error("Webhook error:", err);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error("Webhook error:", err.message);
+    } else {
+      console.error("Webhook error:", err);
+    }
     return new Response("Error processing webhook", { status: 500 });
   }
 }
-
-
